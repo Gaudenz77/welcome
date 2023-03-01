@@ -41,16 +41,16 @@
           <span class=""><WelcomeToOpportunity msg="Welcome to Opportunity"/></span>
         </li>
       </ul>
-        <ul class="infoBox">           
-          <li>
-          <span class="li-time">{{ currentdate }}19:30 Uhr</span><br>
-          <span class="li-topic">{{ title }}Besuch</span><br>
-          <span class="li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</span>
+        <ul class="infoBox">         
+        <li v-for="(item, index) in items" :key="index">
+              <span class="li-time">{{ item.eventDate }}</span><br>
+              <span class="li-topic">{{ item.title }}</span><br>
+              <span class="li-info">{{ item.info }}</span>
           </li>
         </ul>
         <ul class="infoBox">   
           <li>
-          <span class="li-time">{{ currentdate }}19:30 Uhr</span><br>
+          <span class="li-time">{{ eventDate }}19:30 Uhr</span><br>
           <span class="li-topic">{{ title }}Besuch</span><br>
           <span class="li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</span>
         </li>
@@ -76,12 +76,14 @@
 <script>
 /* import HelloWorld from './components/HelloWorld.vue' */
 import WelcomeToOpportunity from './components//WelcomeToOpportunity.vue'
+/* import EventComponent from './components/EventComponent.vue' */
 
 export default {
   name: 'App',
   components: {
     /* HelloWorld, */
-    WelcomeToOpportunity, 
+    WelcomeToOpportunity,
+    
   }
 }
 </script>

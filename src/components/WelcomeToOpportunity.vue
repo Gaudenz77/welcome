@@ -12,8 +12,12 @@ export default {
        
   props: {
     msg: String,
+    items: {
+      type: Array,
+      required: true
    
   },
+  
   
   methods: {
     currentDate() {
@@ -22,8 +26,10 @@ export default {
       return date;
     }
   }
-
 }
+
+
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
