@@ -41,13 +41,7 @@
           <span class=""><WelcomeToOpportunity msg="Welcome to Opportunity"/></span>
         </li>
       </ul>
-      
-          
-   
         <event-component></event-component>
-  
-      
-        
         <!-- <ul class="infoBox">   
           <li>
           <span class="li-time">{{ eventDate }}19:30 Uhr</span><br>
