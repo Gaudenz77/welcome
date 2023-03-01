@@ -41,20 +41,20 @@
           <span class=""><WelcomeToOpportunity msg="Welcome to Opportunity"/></span>
         </li>
       </ul>
-        <ul class="infoBox">         
-        <li v-for="(item, index) in items" :key="index">
-              <span class="li-time">{{ item.eventDate }}</span><br>
-              <span class="li-topic">{{ item.title }}</span><br>
-              <span class="li-info">{{ item.info }}</span>
-          </li>
-        </ul>
-        <ul class="infoBox">   
+      
+          
+   
+        <event-component></event-component>
+  
+      
+        
+        <!-- <ul class="infoBox">   
           <li>
           <span class="li-time">{{ eventDate }}19:30 Uhr</span><br>
           <span class="li-topic">{{ title }}Besuch</span><br>
           <span class="li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</span>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
   <footer>
@@ -77,12 +77,13 @@
 /* import HelloWorld from './components/HelloWorld.vue' */
 import WelcomeToOpportunity from './components//WelcomeToOpportunity.vue'
 /* import EventComponent from './components/EventComponent.vue' */
-
+import EventComponent from './components/EventComponent.vue';
 export default {
   name: 'App',
   components: {
     /* HelloWorld, */
     WelcomeToOpportunity,
+    EventComponent
     
   }
 }
@@ -108,14 +109,13 @@ body {
   padding-left:25px;
 
 }
-
-.infoBox {
+/* height:fit-content;  fit content*/
+/* .infoBox {
   width:80%;
   margin: 0 auto;
   margin-top:20px;
   width:960px;
   height:182px;
-  /* height:fit-content;  fit content*/
   background-color: #0F05A0;
   padding:25px;
   text-decoration:none;
@@ -141,7 +141,7 @@ body {
   font-size:28px;
   font-weight:500;
   color:#FFBFAB;
-}
+} */
 
 footer {
   background-color:white;

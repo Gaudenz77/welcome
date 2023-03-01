@@ -7,17 +7,16 @@
   </div>
 </template>
 <script>
+
+
+
 export default {
   name: 'WelcomeToOpportunity',
        
   props: {
     msg: String,
-    items: {
-      type: Array,
-      required: true
    
   },
-  
   
   methods: {
     currentDate() {
@@ -25,11 +24,17 @@ export default {
       const date = `0${current.getDate()}.0${current.getMonth()+1}.${current.getFullYear()}`;
       return date;
     }
+  },
+  data() {
+    return {
+      events: [],
+    }
   }
+
 }
 
 
-};
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
