@@ -26,10 +26,10 @@ export default {
   },
   methods: {
     updateDate() {
-      const current = new Date();
-      const date = `${current.getDate() < 10 ? "0" + current.getDate() : current.getDate()}.${current.getMonth() < 10 ? "0" + current.getMonth() : current.getMonth()+1}.${current.getFullYear()}`;
-      this.currentDate = date;
-    }
+  const current = new Date();
+  const date = `${current.getDate() < 10 ? "0" + current.getDate() : current.getDate()}.${(current.getMonth()+1) < 10 ? "0" + (current.getMonth()+1) : current.getMonth()+1}.${current.getFullYear()}`;
+  this.currentDate = date;
+}
   },
 }
 

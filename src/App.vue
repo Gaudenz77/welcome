@@ -91,43 +91,10 @@ body {
   margin-bottom:25vh;
 }
 
-.infoBoxBs {
+/* .infoBoxBs {
   background-color: #0F05A0;
   padding-left:25px;
 
-}
-/* height:fit-content;  fit content*/
-/* .infoBox {
-  width:80%;
-  margin: 0 auto;
-  margin-top:20px;
-  width:960px;
-  height:182px;
-  background-color: #0F05A0;
-  padding:25px;
-  text-decoration:none;
-}
-
-.li-time {
-  font-family: 'Inter', sans-serif;
-  font-size:28px;
-  font-weight:900;
-  color:#EB5E00;
-}
-
-.li-topic {
-  font-family: 'Inter', sans-serif;
-  font-size:28px;
-  font-weight:900;
-  color:#FFBFAB;
-  text-decoration:none;
-}
-
-.li-info {
-  font-family: 'Inter', sans-serif;
-  font-size:28px;
-  font-weight:500;
-  color:#FFBFAB;
 } */
 
 footer {
