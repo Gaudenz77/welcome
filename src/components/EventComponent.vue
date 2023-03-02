@@ -20,20 +20,32 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vTWMQ1bHW9tkX0eeaIJOw-4fphuRuqwh8KvAoTpPut1JC72CZuaFSnUJEA7cgeNaEDI51YRdOW3V50D/pub?output=csv'
-      )
-      .then((response) => {
-        const data = response.data.trim().split('\n').slice(1).map((line) => {
-          const [eventDate, eventTitle, eventInfo] = line.split(',');
-          return { eventDate, eventTitle, eventInfo };
+    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 1800000);
+  },
+  methods: {
+    fetchData() {
+      axios
+        .get(
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vTWMQ1bHW9tkX0eeaIJOw-4fphuRuqwh8KvAoTpPut1JC72CZuaFSnUJEA7cgeNaEDI51YRdOW3V50D/pub?output=csv'
+        )
+        .then((response) => {
+          const data = response.data
+            .trim()
+            .split('\n')
+            .slice(1)
+            .map((line) => {
+              const [eventDate, eventTitle, eventInfo] = line.split(',');
+              return { eventDate, eventTitle, eventInfo };
+            });
+          this.events = data;
+        })
+        .catch((error) => {
+          console.error(error);
         });
-        this.events = data;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    },
   },
 };
 </script>

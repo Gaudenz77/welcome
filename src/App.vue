@@ -37,18 +37,11 @@
 
     <div class="container">
       <ul>   
-          <li>
-          <span class=""><WelcomeToOpportunity msg="Welcome to Opportunity"/></span>
+        <li>
+          <span class=""><WelcomeToOpportunity msg="Welcome today to Opportunity"/></span>
         </li>
       </ul>
         <event-component></event-component>
-        <!-- <ul class="infoBox">   
-          <li>
-          <span class="li-time">{{ eventDate }}19:30 Uhr</span><br>
-          <span class="li-topic">{{ title }}Besuch</span><br>
-          <span class="li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</span>
-        </li>
-      </ul> -->
     </div>
 
   <footer>
@@ -70,16 +63,16 @@
 <script>
 /* import HelloWorld from './components/HelloWorld.vue' */
 import WelcomeToOpportunity from './components//WelcomeToOpportunity.vue'
-/* import EventComponent from './components/EventComponent.vue' */
 import EventComponent from './components/EventComponent.vue';
+
 export default {
   name: 'App',
   components: {
     /* HelloWorld, */
     WelcomeToOpportunity,
     EventComponent
-    
   }
+ 
 }
 </script>
 
