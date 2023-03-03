@@ -26,7 +26,6 @@
 
 <script>
 import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -69,7 +68,6 @@ export default {
   background-color: #0F05A0;
   padding-left:25px;
 }
-
 .infoBox {
   width: 80%;
   margin: 0 auto;
@@ -80,7 +78,6 @@ export default {
   padding: 25px;
   text-decoration: none;
 }
-
 .li-time {
   font-family: 'Inter', sans-serif;
   font-size: 28px;
@@ -88,7 +85,6 @@ export default {
   color: #eb5e00;
   text-decoration: none;
 }
-
 .li-topic {
   font-family: 'Inter', sans-serif;
   font-size: 28px;
@@ -96,7 +92,6 @@ export default {
   color: #ffbfab;
   text-decoration: none;
 }
-
 .li-info {
   font-family: 'Inter', sans-serif;
   font-size: 28px;
