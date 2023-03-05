@@ -13,7 +13,7 @@
   </div>
 </template> -->
 <template>
-  <div>
+  <div v-if="events.length">
     <ul v-for="(event, index) in events" :key="index" class="infoBox">
       <li>
         <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
@@ -22,6 +22,10 @@
       </li>
     </ul>
   </div>
+    <div v-else>
+  <p>No events currently listed.</p>
+</div>
+  
 </template>
 
 <script>

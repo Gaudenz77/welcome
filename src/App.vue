@@ -41,6 +41,7 @@
           <span class=""><WelcomeToOpportunity msg="Welcome today to Opportunity"/></span>
         </li>
       </ul>
+      
         <event-component></event-component>
     </div>
 
