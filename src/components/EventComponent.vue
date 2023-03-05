@@ -19,13 +19,13 @@
         <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
         <span class="li-topic">{{ event.eventTitle }}</span><br>
         <span class="li-info">{{ event.eventInfo }}</span>
+        <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
       </li>
     </ul>
   </div>
-    <div v-else>
-  <p>No events currently listed.</p>
-</div>
-  
+  <div v-else>
+    <h2>No events currently listed.</h2>
+  </div>
 </template>
 
 <script>
@@ -54,9 +54,12 @@ export default {
             .split('\n')
             .slice(1)
             .map((line) => {
-              const [eventTime, eventDate, eventTitle, eventInfo] = line.split(',');
-              return { eventTime, eventDate, eventTitle, eventInfo };
-            });
+              const [eventTime, eventDate, eventTitle, eventInfo, eventCategory] = line.split(',');
+              if (eventInfo.includes('')) {
+                return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
+              }
+            })
+            .filter((event) => event != null);
           this.events = data;
         })
         .catch((error) => {
