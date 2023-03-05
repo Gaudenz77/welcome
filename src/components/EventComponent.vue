@@ -28,9 +28,34 @@
   </div>
 </template>
 
+<!-- <template>
+  <div>
+    <FilterForm @filter-applied="applyFilter" @filter-reset="resetFilter"></FilterForm>
+
+    <div v-if="events.length">
+      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+        <li>
+          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+          <span class="li-topic">{{ event.eventTitle }}</span><br>
+          <span class="li-info">{{ event.eventInfo }}</span>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      <h2>No events currently listed.</h2>
+    </div>
+  </div>
+</template> -->
+
+
 <script>
+/* import EventComponent from "@/components/EventComponent.vue"; */
 import axios from 'axios';
+
 export default {
+ /*  components: {
+    EventComponent,
+  }, */
   data() {
     return {
       events: [],

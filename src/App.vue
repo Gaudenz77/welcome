@@ -34,7 +34,10 @@
               </span></div>
       </div>
     </div> -->
-
+    <!-- <section class="eventFilter">
+      <div>
+        <FilterForm @filter-applied="applyFilter" @filter-reset="resetFilter"></FilterForm><event-filter></event-filter></div>
+    </section> -->
     <div class="container">
       <ul>   
         <li>
@@ -44,6 +47,13 @@
       
         <event-component></event-component>
     </div>
+
+
+    
+    
+
+    
+
 
   <footer>
     <div class="footer-wrapper">
@@ -65,12 +75,14 @@
 /* import HelloWorld from './components/HelloWorld.vue' */
 import WelcomeToOpportunity from './components//WelcomeToOpportunity.vue'
 import EventComponent from './components/EventComponent.vue';
+/* import EventFilter from "@/components/EventFilter.vue"; */
 export default {
   name: 'App',
   components: {
     /* HelloWorld, */
     WelcomeToOpportunity,
-    EventComponent
+    EventComponent,
+    /* EventFilter, */
   }
  
 }
