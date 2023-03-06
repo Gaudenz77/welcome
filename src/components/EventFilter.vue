@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
     <div class="container">
       <div class="row justify-content-center bg-info">
         <div class="col-sm-4 mt-5 p-5">
@@ -12,8 +12,7 @@
             <label for="general" class="form-check-label">General</label>
             <br>
             <label>Filter by Keyword:</label>
-            <input class="btn-group" role="group" aria-label="Basic mixed styles example" type="text" v-model="keywordFilter" name="keyword">
-            <br>
+            <input class="btn-group" role="group" aria-label="Basic mixed styles example" type="text" v-model="searchText" name="keyword"><br>
             <button type="submit" class="btn btn-warning">Apply Filter</button>
             <button type="button"  class="btn btn-success" @click="resetFilter">Reset Filters</button>
           </form>
@@ -27,20 +26,25 @@ export default {
   data() {
     return {
       filter: {
-        food: false,
-        education: false,
-      },
-      searchText: "",
-    };
+      food: false,
+      education: false,
+      general: false,
+    },
+    searchText: "",
+  };
   },
   methods: {
     applyFilter() {
+      console.log('Applying filter...');
+      console.log('Filter:', this.filter);
+      console.log('Search text:', this.searchText);
       // Emit an event to notify the parent component
       // that the filter has been applied
       this.$emit("filter-applied", {
-        category: {
+        filter: {
           food: this.filter.food,
           education: this.filter.education,
+          general: this.filter.general,
         },
         searchText: this.searchText,
       });
@@ -49,6 +53,7 @@ export default {
       // Reset the filter data
       this.filter.food = false;
       this.filter.education = false;
+      this.filter.general = false;
       this.searchText = "";
       // Emit an event to notify the parent component
       // that the filter has been reset
@@ -62,4 +67,4 @@ export default {
 
 <style scope>
 
-</style> -->
+</style>

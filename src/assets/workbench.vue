@@ -89,4 +89,7 @@ export default {
   <button type="button" class="btn btn-danger">Left</button>
   <button type="button" class="btn btn-warning">Middle</button>
   <button type="button" class="btn btn-success">Right</button>
+
+  https://docs.google.com/spreadsheets/d/10IMOzXvjDdecxgc9rc7dIXkn0q-4kOzkoVwqY_xjGc8/edit?usp=sharing
+  https://docs.google.com/spreadsheets/d/18mvQRLVuW2JPUQTZI0xkYAu8TEHzS1i2WlDPn-qht4Y/edit?usp=sharing
 </div>

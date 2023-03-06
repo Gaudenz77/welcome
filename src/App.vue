@@ -34,26 +34,14 @@
               </span></div>
       </div>
     </div> -->
-    <!-- <section class="eventFilter">
-      <div>
-        <FilterForm @filter-applied="applyFilter" @filter-reset="resetFilter"></FilterForm><event-filter></event-filter></div>
-    </section> -->
     <div class="container">
       <ul>   
         <li>
           <span class=""><WelcomeToOpportunity msg="Welcome today to Opportunity"/></span>
         </li>
       </ul>
-      
-        <event-component></event-component>
+                        <event-component></event-component>
     </div>
-
-
-    
-    
-
-    
-
 
   <footer>
     <div class="footer-wrapper">

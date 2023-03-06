@@ -1,8 +1,8 @@
-<!-- <template>
+ <!-- <template>
   <div class="container">
     <div class="row justify-content-evenly">
       <div><WelcomeToOpportunity msg="Welcome to Opportunity"/></div>
-      <div class="col-12 m-3 infoBoxBs" v-for="(event, index) in events" :key="index">
+      <div class="col-12 m-3 infoBoxBs" v-for="(event, index) in filteredEvents" :key="index">
         <span class="m-3">
           <li class="list-group-item li-time">{{ event.eventDate}} / {{ event.eventTime }}</li>
           <li class="list-group-item li-topic">{{ event.eventTitle }}</li>
@@ -12,7 +12,7 @@
     </div>
   </div>
 </template> -->
-<template>
+<!--NORMAL WITHOUT FILTER  --><!-- <template>
   <div v-if="events.length">
     <ul v-for="(event, index) in events" :key="index" class="infoBox">
       <li>
@@ -26,39 +26,45 @@
   <div v-else>
     <h2>No events currently listed.</h2>
   </div>
-</template>
+</template> -->
 
-<!-- <template>
+<!-- NORMAL WITH FILTER -->
+<template>
   <div>
-    <FilterForm @filter-applied="applyFilter" @filter-reset="resetFilter"></FilterForm>
-
-    <div v-if="events.length">
-      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
-        <li>
-          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
-          <span class="li-topic">{{ event.eventTitle }}</span><br>
-          <span class="li-info">{{ event.eventInfo }}</span>
-        </li>
-      </ul>
-    </div>
+    <event-filter @filter-applied="filter => applyFilter(filter)" @filter-reset="resetFilter"></event-filter>
+      <div v-if="events.length">
+          <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+            <li>
+              <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+              <span class="li-topic">{{ event.eventTitle }}</span><br>
+              <span class="li-info">{{ event.eventInfo }}</span>
+              <span  class="li-info">&nbsp;{{ event.eventCategory }}</span>
+            </li>
+          </ul>
+      </div>
     <div v-else>
       <h2>No events currently listed.</h2>
     </div>
   </div>
-</template> -->
-
+</template>
 
 <script>
-/* import EventComponent from "@/components/EventComponent.vue"; */
 import axios from 'axios';
+import EventFilter from '@/components/EventFilter.vue';
 
 export default {
- /*  components: {
-    EventComponent,
-  }, */
+  components: {
+    EventFilter,
+  },
   data() {
     return {
       events: [],
+      filter: {
+        food: false,
+        education: false,
+        general: false,
+      },
+      keywordFilter: '',
     };
   },
   mounted() {
@@ -66,6 +72,20 @@ export default {
     setInterval(() => {
       this.fetchData();
     }, 1800000);
+  },
+  computed: {
+    filteredEvents() {
+      if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
+        return this.events.filter((event) => {
+          const matchesCategory = (!this.filter.food || event.eventCategory === 'food') &&
+            (!this.filter.education || event.eventCategory === 'education') &&
+            (!this.filter.general || event.eventCategory === 'general');
+          const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
+          return matchesCategory && matchesKeyword;
+        });
+      }
+      return this.events;
+    },
   },
   methods: {
     fetchData() {
@@ -91,9 +111,91 @@ export default {
           console.error(error);
         });
     },
+    applyFilter(filter) {
+      this.filter = filter;
+    },
+    resetFilter() {
+      this.filter = {
+        food: false,
+        education: false,
+        general: false,
+      };
+      this.keywordFilter = '';
+    },
   },
 };
-</script>
+</script> 
+<!-- Google API -->
+<!-- <script>
+import axios from 'axios';
+import EventFilter from '@/components/EventFilter.vue';
+
+export default {
+  components: {
+    EventFilter,
+  },
+  data() {
+    return {
+      events: [],
+      filter: {
+        food: false,
+        education: false,
+        general: false,
+      },
+      keywordFilter: '',
+    };
+  },
+  mounted() {
+    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 1800000);
+  },
+  computed: {
+    filteredEvents() {
+      if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
+        return this.events.filter((event) => {
+          const matchesCategory = (!this.filter.food || event.eventCategory === 'food') &&
+            (!this.filter.education || event.eventCategory === 'education') &&
+            (!this.filter.general || event.eventCategory === 'general');
+          const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
+          return matchesCategory && matchesKeyword;
+        });
+      }
+      return this.events;
+    },
+  },
+  methods: {
+    fetchData() {
+      const spreadsheetId = '18mvQRLVuW2JPUQTZI0xkYAu8TEHzS1i2WlDPn-qht4Y';  // 10IMOzXvjDdecxgc9rc7dIXkn0q-4kOzkoVwqY_xjGc8 look above
+      /* const range = 'Tabellenblatt1!A1:AA1000'; */ // Replace with the range of cells you want to retrieve
+      const api_token = 'AIzaSyCywsxvpyfF4HeBJO1th1FHaPZ4pB77UHA';
+
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchGet?ranges=A1%3AE100&valueRenderOption=FORMATTED_VALUE&key=${api_token}`;
+      
+
+      axios
+        .get(url)
+        .then((response) => {
+          console.log(response);
+           const data = response.data.valueRanges[0].values.slice(1).map((row) => ({
+            eventTime: row[0],
+            eventDate: row[1],
+            eventTitle: row[2],
+            eventInfo: row[3],
+            eventCategory: row[4],
+          }));
+          this.events = data; 
+        })
+        .catch((error) => {
+          console.error(error);
+        });   
+    },
+    
+  },
+};
+
+</script> -->
 
 <style>
 .infoBoxBs {
