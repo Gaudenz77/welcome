@@ -39,7 +39,7 @@
           <span class=""><WelcomeToOpportunity msg="Welcome today to Opportunity"/></span>
         </li>
       </ul>
-                        <event-component></event-component>
+      <!-- <EventComponent /> --><event-component></event-component>
     </div>
 
   <footer>
@@ -50,7 +50,7 @@
       <div class="footer-item">
         <img src="./assets/Opportunity.png" alt="Image 2">
       </div>
-      <div class="footer-item">
+      <div class="footer-item"> 
         <img src="./assets/SAG_Logo_De.png" alt="Image 3">
       </div>
     </div>
@@ -59,14 +59,12 @@
 </template>
 
 <script>
-/* import HelloWorld from './components/HelloWorld.vue' */
 import WelcomeToOpportunity from './components//WelcomeToOpportunity.vue'
 import EventComponent from './components/EventComponent.vue';
 /* import EventFilter from "@/components/EventFilter.vue"; */
 export default {
   name: 'App',
   components: {
-    /* HelloWorld, */
     WelcomeToOpportunity,
     EventComponent,
     /* EventFilter, */

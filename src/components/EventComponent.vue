@@ -12,14 +12,15 @@
     </div>
   </div>
 </template> -->
-<!--NORMAL WITHOUT FILTER  --><!-- <template>
+<!--NORMAL WITHOUT FILTER  -->
+<!-- <template>
   <div v-if="events.length">
     <ul v-for="(event, index) in events" :key="index" class="infoBox">
       <li>
         <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
-        <span class="li-topic">{{ event.eventTitle }}</span><br>
-        <span class="li-info">{{ event.eventInfo }}</span>
-        <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+          <span class="li-topic">{{ event.eventTitle }}</span><br>
+          <span class="li-info">{{ event.eventInfo }}</span><br>
+          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
       </li>
     </ul>
   </div>
@@ -33,13 +34,12 @@
   <div>
     <event-filter @filter-applied="filter => applyFilter(filter)" @filter-reset="resetFilter"></event-filter>
     <div v-if="filteredEvents.length">
-      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
-        <li>
+      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox"> 
           <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
           <span class="li-topic">{{ event.eventTitle }}</span><br>
-          <span class="li-info">{{ event.eventInfo }}</span>
+          <span class="li-info">{{ event.eventInfo }}</span><br>
           <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
-        </li>
+        
       </ul>
     </div>
     <div v-else>
@@ -100,11 +100,8 @@ export default {
             .slice(1)
             .map((line) => {
               const [eventTime, eventDate, eventTitle, eventInfo, eventCategory] = line.split(',');
-              if (eventInfo.trim() !== '') {
-                return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
-              }
-            })
-            .filter((event) => event != null);
+              return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
+            });
           this.events = data;
         })
         .catch((error) => {
@@ -120,11 +117,93 @@ export default {
         education: false,
         general: false,
       };
-      this.keywordFilter = 'qqqqq';
+      this.keywordFilter = '';
     },
   },
 };
 </script> 
+
+
+<!-- WithFilterSecond -->
+<!-- <template>
+  <div>
+    <event-filter @filter="setFilter" />
+    <div v-if="filteredEvents.length">
+      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+        <li>
+          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+          <span class="li-topic">{{ event.eventTitle }}</span><br>
+          <span class="li-info">{{ event.eventInfo }}</span><br>
+          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      <h2>No events currently listed.</h2>
+    </div>
+  </div>
+</template>
+
+<script>
+/* import EventFilter from './components/EventFilter.vue'; */
+import axios from 'axios';
+
+export default {
+  name: 'App',
+  /* components: {
+    EventFilter,
+  }, */
+  data() {
+    return {
+      events: [],
+      filters: {
+        category: [],
+      },
+    };
+  },
+  mounted() {
+    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 1800000);
+  },
+  computed: {
+    filteredEvents() {
+      if (!this.filters.category.length) {
+        return this.events;
+      }
+      return this.events.filter(event => this.filters.category.includes(event.eventCategory));
+    },
+  },
+  methods: {
+    fetchData() {
+      axios
+        .get(
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vTWMQ1bHW9tkX0eeaIJOw-4fphuRuqwh8KvAoTpPut1JC72CZuaFSnUJEA7cgeNaEDI51YRdOW3V50D/pub?output=csv'
+        )
+        .then((response) => {
+          const data = response.data
+            .trim()
+            .split('\n')
+            .slice(1)
+            .map((line) => {
+              const [eventTime, eventDate, eventTitle, eventInfo, eventCategory] = line.split(',');
+              return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
+            });
+          this.events = data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    setFilter(filter) {
+      this.filters.category = filter;
+    },
+  },
+};
+</script> -->
+
+
 <!-- Google API -->
 <!-- <script>
 import axios from 'axios';
@@ -173,7 +252,6 @@ export default {
 
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchGet?ranges=A1%3AE100&valueRenderOption=FORMATTED_VALUE&key=${api_token}`;
       
-
       axios
         .get(url)
         .then((response) => {
