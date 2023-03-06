@@ -5,7 +5,6 @@
         <img alt="Vue logo" src="./assets/logo.png" style="width:10%; items-align:center;">@
 <!-- <i class="fa-solid fa-at fa-4x" style="color:black;"></i> -->
         <img alt="Vue logo" src="./assets/Opportunity.png">
-<!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 <!-- <WelcomeToOpportunity msg="Welcome to Opportunity"/> -->
       </div>
     </div>
