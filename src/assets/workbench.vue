@@ -93,3 +93,18 @@ export default {
   https://docs.google.com/spreadsheets/d/10IMOzXvjDdecxgc9rc7dIXkn0q-4kOzkoVwqY_xjGc8/edit?usp=sharing
   https://docs.google.com/spreadsheets/d/18mvQRLVuW2JPUQTZI0xkYAu8TEHzS1i2WlDPn-qht4Y/edit?usp=sharing
 </div>
+
+<div v-if="filteredEvents.length">
+  <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+    <li>
+      <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+      <span class="li-topic">{{ event.eventTitle }}</span><br>
+      <span class="li-info">{{ event.eventInfo }}</span>
+      <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+    </li>
+  </ul>
+</div>
+<div v-else>
+  <h2>No events currently listed.</h2>
+</div>
+</div>

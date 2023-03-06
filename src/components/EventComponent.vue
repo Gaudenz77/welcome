@@ -32,16 +32,16 @@
 <template>
   <div>
     <event-filter @filter-applied="filter => applyFilter(filter)" @filter-reset="resetFilter"></event-filter>
-      <div v-if="events.length">
-          <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
-            <li>
-              <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
-              <span class="li-topic">{{ event.eventTitle }}</span><br>
-              <span class="li-info">{{ event.eventInfo }}</span>
-              <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
-            </li>
-          </ul>
-      </div>
+    <div v-if="filteredEvents.length">
+      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+        <li>
+          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+          <span class="li-topic">{{ event.eventTitle }}</span><br>
+          <span class="li-info">{{ event.eventInfo }}</span>
+          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+        </li>
+      </ul>
+    </div>
     <div v-else>
       <h2>No events currently listed.</h2>
     </div>
@@ -75,18 +75,17 @@ export default {
   },
   computed: {
     filteredEvents() {
-  if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
-    return this.events.filter((event) => {
-      const matchesCategory = (!this.filter.food || event.eventCategory !== 'food') &&
-        (!this.filter.education || event.eventCategory !== 'education') &&
-        (!this.filter.general || event.eventCategory !== 'general');
-      const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
-      return matchesCategory && matchesKeyword;
-    });
-  }
-  return this.events;
-},
-
+      if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
+        return this.events.filter((event) => {
+          const matchesCategory = (!this.filter.food || event.eventCategory !== 'food') &&
+            (!this.filter.education || event.eventCategory !== 'education') &&
+            (!this.filter.general || event.eventCategory !== 'general');
+          const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
+          return matchesCategory && matchesKeyword;
+        });
+      }
+      return this.events;
+    },
   },
   methods: {
     fetchData() {
@@ -102,8 +101,8 @@ export default {
             .map((line) => {
               const [eventTime, eventDate, eventTitle, eventInfo, eventCategory] = line.split(',');
               if (eventInfo.trim() !== '') {
-  return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
-}
+                return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
+              }
             })
             .filter((event) => event != null);
           this.events = data;
