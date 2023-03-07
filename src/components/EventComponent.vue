@@ -14,20 +14,22 @@
 </template> -->
 
 <template>
-  <div class="selctionDropdown"><select v-model="selectedCategory">
-  <option value="All">All Categories</option>
-  <option value="education">{{ capitalizeFirstLetter('education') }}</option>
-  <option value="food">{{ capitalizeFirstLetter('food') }}</option>
-  <option value="general">{{ capitalizeFirstLetter('general') }}</option>
-</select></div>
+  <div class="selctionDropdown">
+    <select v-model="selectedCategory">
+      <option value="All">All Categories</option>
+      <option value="education">{{ capitalizeFirstLetter('education') }}</option>
+      <option value="food">{{ capitalizeFirstLetter('food') }}</option>
+      <option value="general">{{ capitalizeFirstLetter('general') }}</option>
+    </select>
+  </div>
   <div>
     <div v-if="filteredEvents.length">  
-      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
-          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
-          <span class="li-topic">{{ event.eventTitle }}</span><br>
-          <span class="li-info">{{ event.eventInfo }}</span><br>
-          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
-      </ul>
+    <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+        <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+        <span class="li-topic">{{ event.eventTitle }}</span><br>
+        <span class="li-info">{{ event.eventInfo }}</span><br>
+        <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+    </ul>
     </div>
     <div v-else>
       <h2>No events currently listed.</h2>
@@ -138,6 +140,7 @@ export default {
         );
       }
     },
+    
   },
   methods: {
     fetchData() {
@@ -165,7 +168,8 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-    },capitalizeFirstLetter(str) {
+    },
+    capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   },
