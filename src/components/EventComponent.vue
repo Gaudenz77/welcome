@@ -132,16 +132,21 @@ export default {
   },
   computed: {
     filteredEvents() {
-      if (this.selectedCategory === "All") {
-        return this.events;
-      } else {
-        return this.events.filter(
-          (event) => event.eventCategory === this.selectedCategory
-        );
-      }
-    },
-    
-  },
+  const currentTime = new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute:'2-digit'});
+  const filteredEvents = this.events.filter(event => {
+    if (this.selectedCategory === "All") {
+      return event.eventTime >= currentTime;
+    } else {
+      return (
+        event.eventCategory === this.selectedCategory &&
+        event.eventTime >= currentTime
+      );
+    }
+  });
+  return filteredEvents;
+}
+
+},
   methods: {
     fetchData() {
       const spreadsheetId = '18mvQRLVuW2JPUQTZI0xkYAu8TEHzS1i2WlDPn-qht4Y';  // 10IMOzXvjDdecxgc9rc7dIXkn0q-4kOzkoVwqY_xjGc8 look above
