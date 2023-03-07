@@ -1,7 +1,14 @@
  <!-- <template>
   <div class="container">
     <div class="row justify-content-evenly">
-      <div><WelcomeToOpportunity msg="Welcome to Opportunity"/></div>
+      <div class="selctionDropdown">
+        <select v-model="selectedCategory">
+          <option value="All">All Categories</option>
+          <option value="education">{{ capitalizeFirstLetter('education') }}</option>
+          <option value="food">{{ capitalizeFirstLetter('food') }}</option>
+          <option value="general">{{ capitalizeFirstLetter('general') }}</option>
+        </select>
+      </div>
       <div class="col-12 m-3 infoBoxBs" v-for="(event, index) in filteredEvents" :key="index">
         <span class="m-3">
           <li class="list-group-item li-time">{{ event.eventDate}} / {{ event.eventTime }}</li>
@@ -134,27 +141,24 @@ export default {
     filteredEvents() {
   const currentTime = new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute:'2-digit'});
   const filteredEvents = this.events.filter(event => {
-    if (this.selectedCategory === "All") {
-      return event.eventTime >= currentTime;
-    } else {
-      return (
-        event.eventCategory === this.selectedCategory &&
-        event.eventTime >= currentTime
-      );
+        if (this.selectedCategory === "All") {
+          return event.eventTime >= currentTime;
+        } else {
+          return (
+            event.eventCategory === this.selectedCategory &&
+            event.eventTime >= currentTime
+          );
+        }
+      });
+      return filteredEvents;
     }
-  });
-  return filteredEvents;
-}
-
-},
+  },
   methods: {
     fetchData() {
       const spreadsheetId = '18mvQRLVuW2JPUQTZI0xkYAu8TEHzS1i2WlDPn-qht4Y';  // 10IMOzXvjDdecxgc9rc7dIXkn0q-4kOzkoVwqY_xjGc8 look above
       /* const range = 'Tabellenblatt1!A1:AA1000'; */ // Replace with the range of cells you want to retrieve
       const api_token = 'AIzaSyCywsxvpyfF4HeBJO1th1FHaPZ4pB77UHA';
-
       const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchGet?ranges=A1%3AE100&valueRenderOption=FORMATTED_VALUE&key=${api_token}`;
-      
       axios
         .get(url)
         .then((response) => {
