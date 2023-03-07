@@ -108,3 +108,70 @@ export default {
   <h2>No events currently listed.</h2>
 </div>
 </div>
+
+
+import axios from 'axios';
+import EventFilter from '@/components/EventFilter.vue';
+
+export default {
+  components: {
+    EventFilter,
+  },
+  data() {
+    return {
+      events: [],
+      filter: {
+        food: false,
+        education: false,
+        general: false,
+      },
+      keywordFilter: '',
+    };
+  },
+  mounted() {
+    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 1800000);
+  },
+  computed: {
+    filteredEvents() {
+      if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
+        return this.events.filter((event) => {
+          const matchesCategory = (!this.filter.food || event.eventCategory !== 'food') &&
+            (!this.filter.education || event.eventCategory !== 'education') &&
+            (!this.filter.general || event.eventCategory !== 'general');
+          const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
+          return matchesCategory && matchesKeyword;
+        });
+      }
+      return this.events;
+    },
+  },
+
+
+  export default {
+  data() {
+    return {
+      filter: {
+      food: false,
+      education: false,
+      general: false,
+    },
+    searchText: "",
+  };
+  },
+  computed: {
+    filteredEvents() {
+      return this.events.filter((event) => {
+        const matchesSearchText = event.name
+          .toLowerCase()
+          .includes(this.searchText.toLowerCase());
+        const matchesFilter =
+          (this.filter.food && event.category === "food") ||
+          (this.filter.education && event.category === "education") ||
+          (this.filter.general && event.category === "general");
+        return matchesSearchText && matchesFilter;
+      });
+    },
+    },

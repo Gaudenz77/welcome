@@ -12,34 +12,21 @@
     </div>
   </div>
 </template> -->
-<!--NORMAL WITHOUT FILTER  -->
-<!-- <template>
-  <div v-if="events.length">
-    <ul v-for="(event, index) in events" :key="index" class="infoBox">
-      <li>
-        <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
-          <span class="li-topic">{{ event.eventTitle }}</span><br>
-          <span class="li-info">{{ event.eventInfo }}</span><br>
-          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
-      </li>
-    </ul>
-  </div>
-  <div v-else>
-    <h2>No events currently listed.</h2>
-  </div>
-</template> -->
 
-<!-- NORMAL WITH FILTER -->
 <template>
+  <div class="selctionDropdown"><select v-model="selectedCategory">
+  <option value="All">All Categories</option>
+  <option value="education">{{ capitalizeFirstLetter('education') }}</option>
+  <option value="food">{{ capitalizeFirstLetter('food') }}</option>
+  <option value="general">{{ capitalizeFirstLetter('general') }}</option>
+</select></div>
   <div>
-    <event-filter @filter-applied="filter => applyFilter(filter)" @filter-reset="resetFilter"></event-filter>
-    <div v-if="filteredEvents.length">
-      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox"> 
+    <div v-if="filteredEvents.length">  
+      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
           <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
           <span class="li-topic">{{ event.eventTitle }}</span><br>
           <span class="li-info">{{ event.eventInfo }}</span><br>
           <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
-        
       </ul>
     </div>
     <div v-else>
@@ -47,8 +34,7 @@
     </div>
   </div>
 </template>
-
-<script>
+<!-- <script>
 import axios from 'axios';
 import EventFilter from '@/components/EventFilter.vue';
 
@@ -76,10 +62,12 @@ export default {
   computed: {
     filteredEvents() {
       if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
-        return this.events.filter((event) => {
+          return this.events.filter((event) => {
+
           const matchesCategory = (!this.filter.food || event.eventCategory !== 'food') &&
-            (!this.filter.education || event.eventCategory !== 'education') &&
-            (!this.filter.general || event.eventCategory !== 'general');
+                        (!this.filter.education || event.eventCategory !== 'education') &&
+                            (!this.filter.general || event.eventCategory !== 'general');
+
           const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
           return matchesCategory && matchesKeyword;
         });
@@ -121,107 +109,17 @@ export default {
     },
   },
 };
-</script> 
-
-
-<!-- WithFilterSecond -->
-<!-- <template>
-  <div>
-    <event-filter @filter="setFilter" />
-    <div v-if="filteredEvents.length">
-      <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
-        <li>
-          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
-          <span class="li-topic">{{ event.eventTitle }}</span><br>
-          <span class="li-info">{{ event.eventInfo }}</span><br>
-          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
-        </li>
-      </ul>
-    </div>
-    <div v-else>
-      <h2>No events currently listed.</h2>
-    </div>
-  </div>
-</template>
-
-<script>
-/* import EventFilter from './components/EventFilter.vue'; */
-import axios from 'axios';
-
-export default {
-  name: 'App',
-  /* components: {
-    EventFilter,
-  }, */
-  data() {
-    return {
-      events: [],
-      filters: {
-        category: [],
-      },
-    };
-  },
-  mounted() {
-    this.fetchData();
-    setInterval(() => {
-      this.fetchData();
-    }, 1800000);
-  },
-  computed: {
-    filteredEvents() {
-      if (!this.filters.category.length) {
-        return this.events;
-      }
-      return this.events.filter(event => this.filters.category.includes(event.eventCategory));
-    },
-  },
-  methods: {
-    fetchData() {
-      axios
-        .get(
-          'https://docs.google.com/spreadsheets/d/e/2PACX-1vTWMQ1bHW9tkX0eeaIJOw-4fphuRuqwh8KvAoTpPut1JC72CZuaFSnUJEA7cgeNaEDI51YRdOW3V50D/pub?output=csv'
-        )
-        .then((response) => {
-          const data = response.data
-            .trim()
-            .split('\n')
-            .slice(1)
-            .map((line) => {
-              const [eventTime, eventDate, eventTitle, eventInfo, eventCategory] = line.split(',');
-              return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
-            });
-          this.events = data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    setFilter(filter) {
-      this.filters.category = filter;
-    },
-  },
-};
-</script> -->
-
+</script>  -->
 
 <!-- Google API -->
-<!-- <script>
+<script>
 import axios from 'axios';
-import EventFilter from '@/components/EventFilter.vue';
 
 export default {
-  components: {
-    EventFilter,
-  },
   data() {
     return {
       events: [],
-      filter: {
-        food: false,
-        education: false,
-        general: false,
-      },
-      keywordFilter: '',
+      selectedCategory: "All",
     };
   },
   mounted() {
@@ -232,16 +130,13 @@ export default {
   },
   computed: {
     filteredEvents() {
-      if (this.filter.food || this.filter.education || this.filter.general || this.keywordFilter) {
-        return this.events.filter((event) => {
-          const matchesCategory = (!this.filter.food || event.eventCategory === 'food') &&
-            (!this.filter.education || event.eventCategory === 'education') &&
-            (!this.filter.general || event.eventCategory === 'general');
-          const matchesKeyword = !this.keywordFilter || event.eventInfo.toLowerCase().includes(this.keywordFilter.toLowerCase());
-          return matchesCategory && matchesKeyword;
-        });
+      if (this.selectedCategory === "All") {
+        return this.events;
+      } else {
+        return this.events.filter(
+          (event) => event.eventCategory === this.selectedCategory
+        );
       }
-      return this.events;
     },
   },
   methods: {
@@ -256,24 +151,26 @@ export default {
         .get(url)
         .then((response) => {
           console.log(response);
-           const data = response.data.valueRanges[0].values.slice(1).map((row) => ({
-            eventTime: row[0],
-            eventDate: row[1],
-            eventTitle: row[2],
-            eventInfo: row[3],
-            eventCategory: row[4],
-          }));
-          this.events = data; 
+          const data = response.data.valueRanges[0].values
+            .slice(1)
+            .map((row) => ({
+              eventTime: row[0],
+              eventDate: row[1],
+              eventTitle: row[2],
+              eventInfo: row[3],
+              eventCategory: row[4],
+            }));
+          this.events = data;
         })
         .catch((error) => {
           console.error(error);
-        });   
-    },
-    
+        });
+    },capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   },
 };
-
-</script> -->
+</script>
 
 <style>
 .infoBoxBs {

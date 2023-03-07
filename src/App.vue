@@ -39,7 +39,7 @@
           <span class=""><WelcomeToOpportunity msg="Welcome today to Opportunity"/></span>
         </li>
       </ul>
-      <!-- <EventComponent /> --><event-component></event-component>
+      <EventComponent /><!-- <event-component></event-component> -->
     </div>
 
   <footer>
