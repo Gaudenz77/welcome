@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
       <div class="col-sm-12 bg-info m-3"></div>
       <div class="col-sm-12 bg-info m-3"></div>
@@ -186,10 +186,35 @@ export default {
       </div>
         <div v-else>
           <h2>No events currently listed.</h2>
-        </div>
+        </div> -->
 
 
-<!-- <script>
+<!-- Variant Google-Csv shet export, non bootstrap, selectdropdown does NOT WORK! -->
+  <!--
+ <template>
+  <div class="selectionDropdown">
+    <select v-model="selectedCategory">
+      <option value="All">All Categories</option>
+      <option value="education">{{ capitalizeFirstLetter('education') }}</option>
+      <option value="food">{{ capitalizeFirstLetter('food') }}</option>
+      <option value="general">{{ capitalizeFirstLetter('general') }}</option>
+    </select>
+  </div>
+  <div>
+    <div v-if="filteredEvents.length">  
+    <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+        <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+        <span class="li-topic">{{ event.eventTitle }}</span><br>
+        <span class="li-info">{{ event.eventInfo }}</span><br>
+        <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+    </ul>
+    </div>
+    <div v-else>
+      <h2>No events currently listed.</h2>
+    </div>
+  </div>
+</template>
+<script>
 import axios from 'axios';
 export default {
   data() {
@@ -246,4 +271,16 @@ export default {
   }
   },
 };
-</script> --> 
+</script> 
+
+<style>
+/* .infoBox {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 960px;
+  height: 182px;
+  background-color: #0f05a0;
+  padding: 25px;
+  text-decoration: none;
+} */</style>--> 
