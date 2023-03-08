@@ -16,6 +16,7 @@
 * Alternative content shown if no entries available
 
 ## Usage: Welcome Screen
+## => Use Firefox first, and if you use Chrome, when loaded, and layout is odd, reload the page!
 * open the following Netlify-Link by clicking on it:
 * ## [Krakatoom Welcomes You](https://krakatoomwelcomesyou.netlify.app/)
 * See what up.
