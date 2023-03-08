@@ -1,4 +1,4 @@
- <!-- <template>
+<template>
   <div class="container">
     <div class="row justify-content-evenly">
       <div class="selctionDropdown">
@@ -18,9 +18,9 @@
       </div>
     </div>
   </div>
-</template> -->
+</template>
 
-<template>
+<!-- <template>
   <div class="selctionDropdown">
     <select v-model="selectedCategory">
       <option value="All">All Categories</option>
@@ -42,7 +42,7 @@
       <h2>No events currently listed.</h2>
     </div>
   </div>
-</template>
+</template> -->
 <!-- <script>
 import axios from 'axios';
 import EventFilter from '@/components/EventFilter.vue';
