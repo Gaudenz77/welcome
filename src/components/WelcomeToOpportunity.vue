@@ -1,13 +1,8 @@
 <template>
-  <div class="conatiner-fluid">
-    <div class="row">
       <div class="titleWelcome">{{ msg }}</div>
       <h2 class="titleTimeDate">{{ currentDate }}</h2>
-    </div>
-  </div>
 </template>
 <script>
-
 export default {
   name: 'WelcomeToOpportunity',
   props: {
@@ -34,8 +29,6 @@ export default {
 }
 
 </script>
-
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /* h1 {

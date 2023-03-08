@@ -175,3 +175,75 @@ export default {
       });
     },
     },
+
+    <div class="col-12 m-3  infoBox" v-if="filteredEvents.length">
+        <ul v-for="(event, index) in filteredEvents" :key="index" class="infoBox">
+          <span class="li-time">{{ event.eventDate}} / {{ event.eventTime }}</span><br>
+          <span class="li-topic">{{ event.eventTitle }}</span><br>
+          <span class="li-info">{{ event.eventInfo }}</span><br>
+          <span hidden class="li-info">&nbsp;{{ event.eventCategory }}</span>
+        </div>
+      </div>
+        <div v-else>
+          <h2>No events currently listed.</h2>
+        </div>
+
+
+<!-- <script>
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      events: [],
+      selectedCategory: "All",
+    };
+  },
+  mounted() {
+    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 1800000);
+  },
+  computed: {
+    filteredEvents() {
+  const currentTime = new Date().toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute:'2-digit'});
+  const filteredEvents = this.events.filter(event => {
+    if (this.selectedCategory === "All") {
+      return event.eventTime >= currentTime;
+    } else {
+      return (
+        event.eventCategory === this.selectedCategory &&
+        event.eventTime >= currentTime
+      );
+    }
+  });
+  return filteredEvents;
+    }
+  },
+  methods: {
+    fetchData() {
+      axios
+        .get(
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vTWMQ1bHW9tkX0eeaIJOw-4fphuRuqwh8KvAoTpPut1JC72CZuaFSnUJEA7cgeNaEDI51YRdOW3V50D/pub?output=csv'
+        )
+        .then((response) => {
+          const data = response.data
+            .trim()
+            .split('\n')
+            .slice(1)
+            .map((line) => {
+              const [eventTime, eventDate, eventTitle, eventInfo, eventCategory] = line.split(',');
+              return { eventTime, eventDate, eventTitle, eventInfo, eventCategory };
+            });
+          this.events = data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  },
+};
+</script> --> 

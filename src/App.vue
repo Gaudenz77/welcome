@@ -1,45 +1,19 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col text-center" style="font-size:50px;font-weight:bold;">
-        <img alt="Vue logo" src="./assets/logo.png" style="width:10%; items-align:center;">@
-<!-- <i class="fa-solid fa-at fa-4x" style="color:black;"></i> -->
-        <img alt="Vue logo" src="./assets/Opportunity.png">
-<!-- <WelcomeToOpportunity msg="Welcome to Opportunity"/> -->
+        <img class="img-fluid" alt="Vue logo" src="./assets/logo.png" style="width:10%; items-align:center;">@
+        <img class="img-fluid" alt="Vue logo" src="./assets/Opportunity.png">
       </div>
     </div>
   </div>
-
-  <!-- <div class="container">
-      <div class="row justify-content-evenly">
-        <div><WelcomeToOpportunity msg="Welcome to Opportunity"/></div>
-        <div class="col-12 m-3 infoBoxBs">
-          <span class="m-3">
-              <li class="list-group-item li-time">{{ currentdate }}19:30 Uhr</li>
-              <li class="list-group-item li-topic">{{ title }}Besuch</li>
-              <li class="list-group-item li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</li>
-              </span></div>
-        <div class="col-12 m-3 infoBoxBs">
-          <span class="m-3">
-              <li class="list-group-item li-time">{{ currentdate }}19:30 Uhr</li>
-              <li class="list-group-item li-topic">{{ title }}Besuch</li>
-              <li class="list-group-item li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</li>
-              </span></div>
-        <div class="col-12 m-3 infoBoxBs">
-          <span class="m-3">
-              <li class="list-group-item li-time">{{ currentdate }}19:30 Uhr</li>
-              <li class="list-group-item li-topic">{{ title }}Besuch</li>
-              <li class="list-group-item li-info">{{ info }}Interessierte können uns gerne für den zweiten Kurs besuchen</li>
-              </span></div>
-      </div>
-    </div> -->
     <div class="container">
-      <ul>   
-        <li>
-          <span class=""><WelcomeToOpportunity msg="Welcome today to Opportunity"/></span>
-        </li>
-      </ul>
-      <EventComponent /><!-- <event-component></event-component> -->
+      <div class="row justify-content-center">
+          <span class="text-center"> <WelcomeToOpportunity msg="Welcome today at Opportunity"/></span>             
+      </div>
+      <div class="row justify-content-center">
+        <EventComponent />
+      </div><!-- <event-component></event-component> -->
     </div>
 
   <footer>
@@ -55,21 +29,17 @@
       </div>
     </div>
   </footer>
-
 </template>
 
 <script>
 import WelcomeToOpportunity from './components//WelcomeToOpportunity.vue'
 import EventComponent from './components/EventComponent.vue';
-/* import EventFilter from "@/components/EventFilter.vue"; */
 export default {
   name: 'App',
   components: {
     WelcomeToOpportunity,
     EventComponent,
-    /* EventFilter, */
   }
- 
 }
 </script>
 
